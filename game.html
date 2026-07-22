@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>CC Game</title>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Creature Cards - Game</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -12,40 +16,75 @@
 
 <body>
 
-<h1>Creature Cards Game</h1>
+
+<div class="ccHeader">
+
+<h1>
+Creature Cards
+</h1>
+
+<p>
+The CC Game Zone
+</p>
 
 
 <a href="index.html">
-<button>
+
+<button class="ccButton">
 ⬅ Back to Index
 </button>
+
 </a>
 
 
+</div>
 
-<div class="card">
 
-<h2>Profile</h2>
+
+
+
+<!-- PLAYER PANEL -->
+
+<div class="ccPanel">
+
+
+<h2>
+Player Profile
+</h2>
+
 
 <p>
-Player:
-<b id="username"></b>
+Username:
+<b id="username">
+Loading...
+</b>
 </p>
+
+
 
 <p>
-Money:
-<b id="money">0</b> CC
+CC Coins:
+<b id="money">
+0
+</b>
 </p>
 
 
-<button onclick="claimStarter()">
-Free Starter Pack
+
+<button class="ccButton" onclick="claimStarter()">
+
+🎁 Claim Free Starter Pack
+
 </button>
 
 
-<button onclick="buyPack()">
-Buy Pack (100 CC)
+
+<button class="ccButton" onclick="buyPack()">
+
+📦 Open Pack (100 CC)
+
 </button>
+
 
 
 </div>
@@ -54,46 +93,153 @@ Buy Pack (100 CC)
 
 
 
-<div id="adminPanel" class="card">
 
-<h2>Admin Jobs</h2>
 
-<input id="newJob"
+<!-- ADMIN PANEL -->
+
+
+<div id="adminPanel" class="ccPanel">
+
+
+<h2>
+Admin Job Creator
+</h2>
+
+
+
+<p>
+Create jobs for players to earn CC.
+</p>
+
+
+
+<input 
+id="newJob"
 placeholder="Job name">
 
 
-<input id="newReward"
-placeholder="Reward">
+
+<input
+id="newReward"
+placeholder="Reward amount">
 
 
-<button onclick="createJob()">
+
+<br><br>
+
+
+<button class="ccButton" onclick="createJob()">
+
 Create Job
+
 </button>
 
+
+
 </div>
 
 
 
 
 
-<h2>Jobs</h2>
-
-<div id="jobs"></div>
 
 
 
+<!-- JOBS -->
 
 
-<h2>Your Cards</h2>
+<div class="ccPanel">
 
-<div id="cards">
+
+<h2>
+Available Jobs
+</h2>
+
+
+<div id="jobs">
+
+<p>
+Loading jobs...
+</p>
+
 
 </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- COLLECTION -->
+
+
+<div class="ccPanel">
+
+
+<h2>
+Your Creature Collection
+</h2>
+
+
+<p>
+Duplicates are allowed.
+</p>
+
+
+
+<div id="cards" class="cardGrid">
+
+
+<p>
+No cards yet.
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
 
 
 
 
 <script src="game.js"></script>
+
+
+
+<script>
+
+
+// Hide admin tools for normal players
+
+
+if(
+localStorage.getItem("CCrole")
+!=="admin"
+
+){
+
+document.getElementById(
+"adminPanel"
+).style.display="none";
+
+
+}
+
+
+
+</script>
+
+
 
 </body>
 

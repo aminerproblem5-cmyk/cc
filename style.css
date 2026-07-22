@@ -1,45 +1,245 @@
-.ccCard{
-width:140px;
-height:170px;
-display:inline-block;
-margin:8px;
-padding:10px;
-border:3px solid grey;
-border-radius:10px;
-background:#222;
+/* =========================
+   CC GAME STYLES
+========================= */
+
+
+.ccHeader {
+    text-align:center;
+    margin-bottom:20px;
 }
 
 
-.common{
-border-color:grey;
+.ccButton {
+
+    background:#00cc55;
+    color:white;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
 }
 
 
-.uncommon{
-border-color:green;
+.ccButton:hover {
+
+    transform:scale(1.05);
+
 }
 
 
-.rare{
-border-color:#3399ff;
+
+.ccPanel {
+
+    background:#292929;
+
+    border:2px solid #555;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin:20px auto;
+
+    max-width:800px;
+
 }
 
 
-.legendary{
-border-color:gold;
+
+
+
+.cardGrid {
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    justify-content:center;
+
 }
 
 
-.mythical{
-border-color:red;
+
+
+/* CC CARD DESIGN */
+
+.ccCard {
+
+
+    width:130px;
+
+    height:180px;
+
+
+    border-radius:12px;
+
+
+    background:#1d1d1d;
+
+
+    border:4px solid grey;
+
+
+    padding:10px;
+
+
+    text-align:center;
+
+
+    transition:0.2s;
+
+
 }
 
 
-.secret{
-border-color:purple;
+
+.ccCard:hover {
+
+    transform:scale(1.08);
+
 }
 
 
-.obstratick{
-border-color:rainbow;
+
+
+.ccCard h3 {
+
+    margin-top:5px;
+
+    font-size:16px;
+
+}
+
+
+
+
+.ccPicture {
+
+
+    height:60px;
+
+    width:60px;
+
+
+    margin:auto;
+
+
+    background:#444;
+
+
+    border-radius:50%;
+
+
+}
+
+
+
+
+
+/* RARITIES */
+
+
+.common {
+
+    border-color:#999;
+
+}
+
+
+.uncommon {
+
+    border-color:#00ff55;
+
+}
+
+
+.rare {
+
+    border-color:#3399ff;
+
+}
+
+
+.legendary {
+
+    border-color:#ffe600;
+
+    box-shadow:0 0 12px #ffe600;
+
+}
+
+
+.mythical {
+
+    border-color:red;
+
+    box-shadow:0 0 12px red;
+
+}
+
+
+.secret {
+
+    border-color:#8b00ff;
+
+    box-shadow:0 0 15px #8b00ff;
+
+    background:
+    linear-gradient(
+    135deg,
+    #111,
+    #402080
+    );
+
+}
+
+
+.obstratick {
+
+    border:4px solid;
+
+    background:
+    linear-gradient(
+    45deg,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    purple
+    );
+
+    color:white;
+
+}
+
+
+
+/* JOB BOXES */
+
+
+.jobCard {
+
+
+    background:#333;
+
+    border:2px solid #666;
+
+    border-radius:12px;
+
+
+    padding:15px;
+
+    margin:10px;
+
+
 }
