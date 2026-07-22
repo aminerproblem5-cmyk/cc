@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Creature Cards</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Creature Cards (CC)</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -16,13 +19,97 @@
 <h1>Creature Cards (CC)</h1>
 
 
+<div class="card">
+
 <p>
 Logged in as:
-<span id="user"></span>
+<b id="user"></b>
 </p>
 
+<a href="login.html">
+<button>
+Login
+</button>
+</a>
 
-<h2>Creature Database</h2>
+
+<span id="adminButton"></span>
+
+</div>
+
+
+
+
+<h2>Types</h2>
+
+<div class="card">
+
+<ul>
+
+<li>Rock</li>
+<li>Nature</li>
+<li>Undead</li>
+<li>Carbonate</li>
+<li>Bug</li>
+<li>Sharp</li>
+<li>Flying</li>
+<li>Halloween</li>
+<li>Animal</li>
+<li>Normal</li>
+
+</ul>
+
+</div>
+
+
+
+
+
+<h2>Rarities</h2>
+
+
+<div class="card">
+
+<p class="common">
+Common - Grey
+</p>
+
+<p class="uncommon">
+Uncommon - Green
+</p>
+
+<p class="rare">
+Rare - Blue
+</p>
+
+<p class="legendary">
+Legendary - Shiny Yellow
+</p>
+
+<p class="mythical">
+Mythical - Red
+</p>
+
+<p class="secret">
+Secret - Galaxy
+</p>
+
+<p class="obstratick">
+Obstratick - Rainbow
+</p>
+
+</div>
+
+
+
+
+
+
+
+<h2>Creature Cards</h2>
+
+
+
 
 
 <div class="card">
@@ -40,18 +127,37 @@ Logged in as:
 
 
 
+
+
 <div class="card">
 
 <h3>Podel</h3>
 
 <p>Type: Normal</p>
-<p>Strength: Rock</p>
-<p>Ability: Throws unlimited rocks</p>
+
+<p>
+Strength: Rock
+</p>
+
+<p>
+Ability:
+Can pick up and throw unlimited rocks.
+Weak in normal combat.
+</p>
+
+<p>Diet: Fish from ponds</p>
 <p>Speed: 30</p>
 <p>Height: 0.7m</p>
 <p>Danger: 5/10</p>
 
+<p class="secret">
+Secret
+</p>
+
 </div>
+
+
+
 
 
 
@@ -61,11 +167,19 @@ Logged in as:
 
 <p>Type: Flying</p>
 <p>Strength: 500</p>
+<p>Diet: Rats</p>
 <p>Speed: 300</p>
+<p>Height: 3m</p>
 <p>Danger: 6/10</p>
-<p>Rarity: Obstratick</p>
+
+<p class="obstratick">
+Obstratick
+</p>
 
 </div>
+
+
+
 
 
 
@@ -75,10 +189,19 @@ Logged in as:
 
 <p>Type: Undead</p>
 <p>Strength: 400</p>
+<p>Diet: Nothing</p>
 <p>Speed: 150</p>
+<p>Height: 2.3m</p>
 <p>Danger: 5/10</p>
 
+<p class="rare">
+Rare
+</p>
+
 </div>
+
+
+
 
 
 
@@ -88,9 +211,19 @@ Logged in as:
 
 <p>Type: Carbonate</p>
 <p>Strength: 50</p>
+<p>Diet: Bone marrow</p>
 <p>Speed: 230</p>
+<p>Height: 5cm</p>
+<p>Danger: 4/10</p>
+
+<p class="uncommon">
+Uncommon
+</p>
 
 </div>
+
+
+
 
 
 
@@ -100,9 +233,19 @@ Logged in as:
 
 <p>Type: Bug</p>
 <p>Strength: 300</p>
+<p>Diet: Anything</p>
 <p>Speed: 30</p>
+<p>Height: 10cm</p>
+<p>Danger: 5/10</p>
+
+<p class="uncommon">
+Uncommon
+</p>
 
 </div>
+
+
+
 
 
 
@@ -112,10 +255,19 @@ Logged in as:
 
 <p>Type: Flying</p>
 <p>Strength: 400</p>
+<p>Diet: Air</p>
 <p>Speed: 300</p>
-<p>Rarity: Legendary</p>
+<p>Height: 18.5m</p>
+<p>Danger: 7/10</p>
+
+<p class="legendary">
+Legendary
+</p>
 
 </div>
+
+
+
 
 
 
@@ -125,9 +277,80 @@ Logged in as:
 
 <p>Type: Rock</p>
 <p>Strength: 0</p>
+<p>Diet: Nothing</p>
 <p>Speed: 1.3</p>
+<p>Height: 1.3m</p>
+<p>Danger: 0/10</p>
+
+<p class="common">
+Common
+</p>
 
 </div>
+
+
+
+
+
+
+
+<h2>Biomes</h2>
+
+
+
+
+<div class="card">
+
+<h3>Sea</h3>
+
+<p>
+Buffs Current cards and Sea Heart cards.
+</p>
+
+<p>
+Rarity: Unknown
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>Cave</h3>
+
+<p>
+Buffs Rock and Undead.
+</p>
+
+<p class="legendary">
+Legendary
+</p>
+
+</div>
+
+
+
+
+
+<div class="card">
+
+<h3>Field With Trees</h3>
+
+<p>
+Buffs Bugs and Nature.
+</p>
+
+<p class="common">
+Common
+</p>
+
+</div>
+
+
+
 
 
 
@@ -143,7 +366,8 @@ Logged in as:
 <br>
 
 
-<input id="message"
+<input
+id="message"
 placeholder="Message">
 
 
@@ -153,7 +377,49 @@ Send
 
 
 
+
+
+
+
 <script src="app.js"></script>
+
+
+<script>
+
+
+let username =
+localStorage.getItem("CCusername");
+
+
+document.getElementById("user").innerText =
+username || "Guest";
+
+
+
+if(
+localStorage.getItem("CCrole")
+==="admin"
+){
+
+document.getElementById("adminButton").innerHTML =
+
+`
+
+<a href="admin.html">
+
+<button>
+Admin Panel
+</button>
+
+</a>
+
+`;
+
+}
+
+
+</script>
+
 
 
 </body>
