@@ -1,53 +1,37 @@
-/* =========================
-   CC GAME STYLES
-========================= */
-
-
-.ccHeader {
-    text-align:center;
-    margin-bottom:20px;
+*{
+box-sizing:border-box;
 }
 
 
-.ccButton {
+body{
 
-    background:#00cc55;
-    color:white;
+margin:0;
 
-    border:none;
+padding:20px;
 
-    padding:10px 18px;
+background:#101010;
 
-    border-radius:8px;
+color:white;
 
-    cursor:pointer;
-
-    font-weight:bold;
-
-}
-
-
-.ccButton:hover {
-
-    transform:scale(1.05);
+font-family:Arial, Helvetica, sans-serif;
 
 }
 
 
 
-.ccPanel {
+h1{
 
-    background:#292929;
+text-align:center;
 
-    border:2px solid #555;
+color:#66ff66;
 
-    border-radius:15px;
+}
 
-    padding:20px;
 
-    margin:20px auto;
 
-    max-width:800px;
+h2{
+
+color:#ffffff;
 
 }
 
@@ -55,88 +39,74 @@
 
 
 
-.cardGrid {
+button{
 
-    display:flex;
+background:#19c463;
 
-    flex-wrap:wrap;
+color:white;
 
-    gap:12px;
+border:none;
 
-    justify-content:center;
+padding:10px 15px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+margin:5px;
+
+}
+
+
+
+button:hover{
+
+transform:scale(1.05);
+
+}
+
+
+
+input{
+
+background:#222;
+
+color:white;
+
+border:2px solid #555;
+
+padding:10px;
+
+border-radius:8px;
+
+margin:5px;
 
 }
 
 
 
 
-/* CC CARD DESIGN */
 
-.ccCard {
-
-
-    width:130px;
-
-    height:180px;
+/* PANELS */
 
 
-    border-radius:12px;
+.ccPanel,
+.card{
 
 
-    background:#1d1d1d;
+background:#222;
 
+border:2px solid #555;
 
-    border:4px solid grey;
+border-radius:15px;
 
+padding:20px;
 
-    padding:10px;
+margin:20px auto;
 
-
-    text-align:center;
-
-
-    transition:0.2s;
-
-
-}
-
-
-
-.ccCard:hover {
-
-    transform:scale(1.08);
-
-}
-
-
-
-
-.ccCard h3 {
-
-    margin-top:5px;
-
-    font-size:16px;
-
-}
-
-
-
-
-.ccPicture {
-
-
-    height:60px;
-
-    width:60px;
-
-
-    margin:auto;
-
-
-    background:#444;
-
-
-    border-radius:50%;
+max-width:900px;
 
 
 }
@@ -145,101 +115,311 @@
 
 
 
-/* RARITIES */
+/* GAME HEADER */
 
 
-.common {
+.ccHeader{
 
-    border-color:#999;
+text-align:center;
 
-}
-
-
-.uncommon {
-
-    border-color:#00ff55;
-
-}
-
-
-.rare {
-
-    border-color:#3399ff;
-
-}
-
-
-.legendary {
-
-    border-color:#ffe600;
-
-    box-shadow:0 0 12px #ffe600;
-
-}
-
-
-.mythical {
-
-    border-color:red;
-
-    box-shadow:0 0 12px red;
-
-}
-
-
-.secret {
-
-    border-color:#8b00ff;
-
-    box-shadow:0 0 15px #8b00ff;
-
-    background:
-    linear-gradient(
-    135deg,
-    #111,
-    #402080
-    );
-
-}
-
-
-.obstratick {
-
-    border:4px solid;
-
-    background:
-    linear-gradient(
-    45deg,
-    red,
-    orange,
-    yellow,
-    green,
-    blue,
-    purple
-    );
-
-    color:white;
+margin-bottom:30px;
 
 }
 
 
 
-/* JOB BOXES */
 
 
-.jobCard {
+/* CARD COLLECTION */
 
 
-    background:#333;
-
-    border:2px solid #666;
-
-    border-radius:12px;
+.cardGrid{
 
 
-    padding:15px;
+display:flex;
 
-    margin:10px;
+flex-wrap:wrap;
+
+gap:15px;
+
+justify-content:center;
+
+
+}
+
+
+
+
+
+/* CREATURE CARD */
+
+
+.ccCard{
+
+
+width:150px;
+
+height:210px;
+
+
+background:#191919;
+
+
+border:4px solid grey;
+
+
+border-radius:15px;
+
+
+padding:10px;
+
+
+text-align:center;
+
+
+transition:0.2s;
+
+
+overflow:hidden;
+
+
+}
+
+
+
+.ccCard:hover{
+
+
+transform:translateY(-8px);
+
+
+}
+
+
+
+
+
+.ccCard h3{
+
+
+margin:5px;
+
+
+font-size:18px;
+
+
+}
+
+
+
+
+
+.cardPicture{
+
+
+height:60px;
+
+width:60px;
+
+background:#444;
+
+border-radius:50%;
+
+margin:auto;
+
+
+}
+
+
+
+
+
+.ccStat{
+
+
+font-size:13px;
+
+margin:3px;
+
+
+}
+
+
+
+
+
+/* RARITY */
+
+
+.common{
+
+border-color:#999;
+
+
+}
+
+
+.uncommon{
+
+
+border-color:#00ff55;
+
+
+}
+
+
+.rare{
+
+
+border-color:#3399ff;
+
+
+}
+
+
+
+.legendary{
+
+
+border-color:#ffe600;
+
+box-shadow:
+0 0 15px gold;
+
+
+}
+
+
+
+.mythical{
+
+
+border-color:red;
+
+box-shadow:
+0 0 15px red;
+
+
+}
+
+
+
+.secret{
+
+
+border-color:#9b00ff;
+
+
+background:
+linear-gradient(
+135deg,
+#111,
+#3b126e
+);
+
+
+box-shadow:
+0 0 15px purple;
+
+
+}
+
+
+
+.obstratick{
+
+
+background:
+
+linear-gradient(
+45deg,
+red,
+orange,
+yellow,
+green,
+blue,
+purple
+);
+
+
+color:white;
+
+
+border-color:white;
+
+
+}
+
+
+
+
+
+
+
+/* JOBS */
+
+
+.jobCard{
+
+
+background:#292929;
+
+
+border:2px solid #666;
+
+
+border-radius:12px;
+
+
+padding:15px;
+
+
+margin:10px;
+
+
+}
+
+
+
+
+
+/* CHAT */
+
+
+#chatBox{
+
+
+height:300px;
+
+overflow:auto;
+
+
+background:#151515;
+
+
+border:2px solid #555;
+
+
+border-radius:10px;
+
+
+padding:10px;
+
+
+}
+
+
+
+.message{
+
+
+background:#333;
+
+padding:8px;
+
+border-radius:8px;
+
+margin:5px;
 
 
 }
