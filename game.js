@@ -2,6 +2,7 @@ const DATABASE_URL =
 "https://creature-cards-ebc02-default-rtdb.firebaseio.com/";
 
 
+
 const username =
 localStorage.getItem("CCusername");
 
@@ -11,18 +12,25 @@ localStorage.getItem("CCrole");
 
 
 
-document.getElementById("username").innerText =
-username || "Guest";
+if(!username){
 
-
-
-if(role !== "admin"){
-
-document.getElementById("adminPanel").style.display="none";
+window.location="login.html";
 
 }
 
 
+
+
+document.getElementById("username").innerText =
+username;
+
+
+
+
+
+// ============================
+// CARD DATABASE
+// ============================
 
 
 const creatures = [
@@ -31,7 +39,10 @@ const creatures = [
 name:"Thorn Scout",
 type:"Nature",
 strength:150,
+diet:"Poison",
 speed:200,
+height:"2m",
+danger:"6/10",
 rarity:"Rare"
 },
 
@@ -39,7 +50,10 @@ rarity:"Rare"
 name:"Podel",
 type:"Normal",
 strength:"Rock",
+diet:"Fish from ponds",
 speed:30,
+height:"0.7m",
+danger:"5/10",
 rarity:"Secret"
 },
 
@@ -47,7 +61,10 @@ rarity:"Secret"
 name:"Berd",
 type:"Flying",
 strength:500,
+diet:"Rats",
 speed:300,
+height:"3m",
+danger:"6/10",
 rarity:"Obstratick"
 },
 
@@ -55,7 +72,10 @@ rarity:"Obstratick"
 name:"Skelly",
 type:"Undead",
 strength:400,
+diet:"Nothing",
 speed:150,
+height:"2.3m",
+danger:"5/10",
 rarity:"Rare"
 },
 
@@ -63,7 +83,10 @@ rarity:"Rare"
 name:"Sodium Carbinate",
 type:"Carbonate",
 strength:50,
+diet:"Bone marrow",
 speed:230,
+height:"5cm",
+danger:"4/10",
 rarity:"Uncommon"
 },
 
@@ -71,7 +94,10 @@ rarity:"Uncommon"
 name:"Aum",
 type:"Bug",
 strength:300,
+diet:"Anything",
 speed:30,
+height:"10cm",
+danger:"5/10",
 rarity:"Uncommon"
 },
 
@@ -79,7 +105,10 @@ rarity:"Uncommon"
 name:"Tree Person",
 type:"Flying",
 strength:400,
+diet:"Air",
 speed:300,
+height:"18.5m",
+danger:"7/10",
 rarity:"Legendary"
 },
 
@@ -87,11 +116,16 @@ rarity:"Legendary"
 name:"Motor Right",
 type:"Rock",
 strength:0,
+diet:"Nothing",
 speed:1.3,
+height:"1.3m",
+danger:"0/10",
 rarity:"Common"
 }
 
 ];
+
+
 
 
 
@@ -121,24 +155,32 @@ rarity:"Mythical"
 
 
 
+// ============================
+// DATABASE
+// ============================
+
+
+
 async function getUser(){
 
 
-let r =
+let response =
 await fetch(
+
 DATABASE_URL+
 "users/"+username+".json"
+
 );
 
 
-return await r.json() || {};
+return await response.json() || {};
 
 }
 
 
 
 
-async function saveUser(data){
+async function updateUser(data){
 
 
 await fetch(
@@ -167,7 +209,12 @@ body:JSON.stringify(data)
 
 
 
-async function load(){
+// ============================
+// LOAD GAME
+// ============================
+
+
+async function loadGame(){
 
 
 let user =
@@ -179,18 +226,22 @@ if(user.money===undefined){
 
 user.money=0;
 
-await saveUser(user);
+await updateUser(user);
 
 }
 
 
 
 document.getElementById("money")
-.innerText=user.money;
+.innerText =
+user.money;
 
 
 
-showCards(user.cards || []);
+showCards(
+user.cards || []
+);
+
 
 
 loadJobs();
@@ -201,47 +252,50 @@ loadJobs();
 
 
 
-
-function randomCard(){
-
-
-return creatures[
-Math.floor(
-Math.random()*creatures.length
-)
-];
+// ============================
+// PACKS
+// ============================
 
 
-}
+function createPack(){
 
 
+let cards=[];
 
 
-
-function makePack(){
-
-
-let pack=[];
-
-
-let roll =
+let chance =
 Math.random()*100;
 
 
 let specialAmount=0;
 
 
-if(roll<=2)
+
+if(chance<=2){
+
 specialAmount=4;
 
-else if(roll<=7)
+}
+
+else if(chance<=7){
+
 specialAmount=3;
 
-else if(roll<=17)
+}
+
+else if(chance<=17){
+
 specialAmount=2;
 
-else if(roll<=37)
+}
+
+else if(chance<=37){
+
 specialAmount=1;
+
+}
+
+
 
 
 
@@ -250,7 +304,8 @@ for(let i=0;i<10;i++){
 
 if(i<specialAmount){
 
-pack.push(
+
+cards.push(
 specials[
 Math.floor(
 Math.random()*specials.length
@@ -258,21 +313,31 @@ Math.random()*specials.length
 ]
 );
 
+
 }
 
 else{
 
-pack.push(
-randomCard()
+
+cards.push(
+
+creatures[
+Math.floor(
+Math.random()*creatures.length
+)
+]
+
 );
 
-}
-
 
 }
 
 
-return pack;
+}
+
+
+
+return cards;
 
 }
 
@@ -290,9 +355,11 @@ await getUser();
 
 if(user.starterClaimed){
 
+
 alert(
-"You already claimed it!"
+"You already claimed your free pack!"
 );
+
 
 return;
 
@@ -300,25 +367,30 @@ return;
 
 
 
-let cards =
+user.cards =
 user.cards || [];
 
 
-cards.push(
-...makePack()
+
+user.cards.push(
+...createPack()
 );
 
 
 
-user.cards=cards;
-
 user.starterClaimed=true;
 
 
-await saveUser(user);
+
+await updateUser(user);
 
 
-showCards(cards);
+loadGame();
+
+
+alert(
+"Starter pack opened!"
+);
 
 
 }
@@ -337,9 +409,11 @@ await getUser();
 
 if(user.money <100){
 
+
 alert(
-"Need 100 CC"
+"You need 100 CC"
 );
+
 
 return;
 
@@ -354,22 +428,29 @@ user.cards =
 user.cards || [];
 
 
+
 user.cards.push(
-...makePack()
+...createPack()
 );
 
 
 
-await saveUser(user);
+await updateUser(user);
 
 
-load();
+loadGame();
 
 
 }
 
 
 
+
+
+
+// ============================
+// DISPLAY CARDS
+// ============================
 
 
 
@@ -384,19 +465,69 @@ box.innerHTML="";
 
 
 
+if(cards.length===0){
+
+
+box.innerHTML=
+"<p>No cards yet!</p>";
+
+
+return;
+
+}
+
+
+
+
+
 cards.forEach(card=>{
 
 
+// OLD CARD FORMAT
+
+if(typeof card==="string"){
+
+
+box.innerHTML+=`
+
+<div class="ccCard common">
+
+<div class="cardPicture"></div>
+
+<h3>${card}</h3>
+
+<p>
+Creature
+</p>
+
+<b>
+Common
+</b>
+
+</div>
+
+`;
+
+
+return;
+
+}
+
+
+
+
 let rarity =
-card.rarity
+(card.rarity || "Common")
 .toLowerCase();
 
 
 
-box.innerHTML += `
-
+box.innerHTML+=`
 
 <div class="ccCard ${rarity}">
+
+
+<div class="cardPicture"></div>
 
 
 <h3>
@@ -404,30 +535,118 @@ ${card.name}
 </h3>
 
 
-<p>
-${card.type}
+<p class="ccStat">
+Type:
+${card.type || "-"}
 </p>
 
 
-<p>
+<p class="ccStat">
 STR:
 ${card.strength || "-"}
 </p>
 
 
-<p>
+<p class="ccStat">
 SPD:
 ${card.speed || "-"}
 </p>
 
 
-<b>
-${card.rarity}
-</b>
+<p class="ccStat">
+${card.rarity || "Common"}
+</p>
 
 
 </div>
 
+`;
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+// ============================
+// JOB SYSTEM
+// ============================
+
+
+
+async function loadJobs(){
+
+
+let response =
+await fetch(
+
+DATABASE_URL+
+"jobs.json"
+
+);
+
+
+let jobs =
+await response.json();
+
+
+
+let box =
+document.getElementById("jobs");
+
+
+
+box.innerHTML="";
+
+
+
+if(!jobs){
+
+
+box.innerHTML=
+"<p>No jobs available</p>";
+
+
+return;
+
+}
+
+
+
+
+Object.keys(jobs)
+.forEach(job=>{
+
+
+box.innerHTML+=`
+
+<div class="jobCard">
+
+<h3>
+${job}
+</h3>
+
+
+<p>
+Reward:
+${jobs[job].reward} CC
+</p>
+
+
+<button onclick="completeJob('${job}')">
+
+Complete
+
+</button>
+
+
+</div>
 
 `;
 
@@ -441,9 +660,77 @@ ${card.rarity}
 
 
 
+async function completeJob(job){
+
+
+let response =
+await fetch(
+
+DATABASE_URL+
+"jobs/"+job+".json"
+
+);
+
+
+let data =
+await response.json();
+
+
+
+if(!data)return;
+
+
+
+let user =
+await getUser();
+
+
+
+user.money =
+(user.money || 0)
++
+Number(data.reward);
+
+
+
+await updateUser(user);
+
+
+
+alert(
+"Job complete! +" 
++data.reward+
+" CC"
+);
+
+
+
+loadGame();
+
+
+}
+
+
+
+
+
+
+
+// ============================
+// ADMIN JOB CREATION
+// ============================
+
 
 
 async function createJob(){
+
+
+if(role!=="admin"){
+
+return;
+
+}
+
 
 
 let name =
@@ -454,6 +741,19 @@ let reward =
 Number(
 document.getElementById("newReward").value
 );
+
+
+
+if(!name || !reward){
+
+alert(
+"Fill in job details"
+);
+
+return;
+
+}
+
 
 
 
@@ -481,6 +781,13 @@ reward:reward
 );
 
 
+
+alert(
+"Job created"
+);
+
+
+
 loadJobs();
 
 
@@ -489,113 +796,4 @@ loadJobs();
 
 
 
-
-async function loadJobs(){
-
-
-let r =
-await fetch(
-
-DATABASE_URL+
-"jobs.json"
-
-);
-
-
-let jobs =
-await r.json();
-
-
-
-let box =
-document.getElementById("jobs");
-
-
-box.innerHTML="";
-
-
-
-if(!jobs)return;
-
-
-
-Object.keys(jobs)
-.forEach(job=>{
-
-
-box.innerHTML+=`
-
-<div class="card">
-
-<h3>
-${job}
-</h3>
-
-<p>
-Reward:
-${jobs[job].reward} CC
-</p>
-
-
-<button onclick="completeJob('${job}')">
-
-Complete
-
-</button>
-
-</div>
-
-`;
-
-});
-
-
-}
-
-
-
-
-
-
-async function completeJob(job){
-
-
-let user =
-await getUser();
-
-
-
-let r =
-await fetch(
-
-DATABASE_URL+
-"jobs/"+job+".json"
-
-);
-
-
-let data =
-await r.json();
-
-
-
-user.money =
-(user.money || 0)
-+
-data.reward;
-
-
-
-await saveUser(user);
-
-
-load();
-
-
-}
-
-
-
-
-
-load();
+loadGame();
