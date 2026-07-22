@@ -797,3 +797,273 @@ loadJobs();
 
 
 loadGame();
+
+// ============================
+// ADMIN CONSOLE
+// ============================
+
+
+if(role !== "admin"){
+
+let consoleBox =
+document.getElementById("adminConsole");
+
+
+if(consoleBox){
+
+consoleBox.style.display="none";
+
+}
+
+}
+
+
+
+
+
+async function runAdminCommand(){
+
+
+if(role !== "admin"){
+
+return;
+
+}
+
+
+
+let input =
+document.getElementById("adminCommand").value;
+
+
+
+let parts =
+input.split(" ");
+
+
+
+let result =
+document.getElementById("adminResult");
+
+
+
+
+// RESET CARDS
+
+if(parts[0]==="/resetcards"){
+
+
+let user =
+parts[1];
+
+
+await fetch(
+
+DATABASE_URL+
+"users/"+user+"/cards.json",
+
+{
+
+method:"DELETE"
+
+}
+
+);
+
+
+
+await fetch(
+
+DATABASE_URL+
+"users/"+user+"/starterClaimed.json",
+
+{
+
+method:"DELETE"
+
+}
+
+);
+
+
+
+result.innerText=
+"Cards reset for "+user;
+
+
+}
+
+
+
+
+
+// RESET MONEY
+
+else if(parts[0]==="/resetmoney"){
+
+
+let user =
+parts[1];
+
+
+await fetch(
+
+DATABASE_URL+
+"users/"+user+"/money.json",
+
+{
+
+method:"PUT",
+
+body:"0"
+
+}
+
+);
+
+
+result.innerText=
+"Money reset for "+user;
+
+
+}
+
+
+
+
+
+// FULL RESET
+
+else if(parts[0]==="/resetplayer"){
+
+
+let user =
+parts[1];
+
+
+await fetch(
+
+DATABASE_URL+
+"users/"+user+".json",
+
+{
+
+method:"DELETE"
+
+}
+
+);
+
+
+
+result.innerText=
+"Player deleted: "+user;
+
+
+}
+
+
+
+
+
+// GIVE MONEY
+
+else if(parts[0]==="/give"){
+
+
+let user =
+parts[1];
+
+
+let amount =
+Number(parts[2]);
+
+
+
+await fetch(
+
+DATABASE_URL+
+"users/"+user+"/money.json",
+
+{
+
+method:"PUT",
+
+body:amount
+
+}
+
+);
+
+
+
+result.innerText=
+"Gave "+amount+" CC to "+user;
+
+
+}
+
+
+
+
+
+// CREATE JOB
+
+else if(parts[0]==="/job"){
+
+
+let job =
+parts[1];
+
+
+let reward =
+Number(parts[2]);
+
+
+
+await fetch(
+
+DATABASE_URL+
+"jobs/"+job+".json",
+
+{
+
+method:"PUT",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+reward:reward
+
+})
+
+}
+
+);
+
+
+
+result.innerText=
+"Created job "+job;
+
+
+}
+
+
+
+
+
+else{
+
+
+result.innerText=
+"Unknown command";
+
+
+}
+
+
+}

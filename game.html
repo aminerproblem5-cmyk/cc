@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Creature Cards Game</title>
 
@@ -14,18 +17,21 @@
 <body>
 
 
-
 <div class="ccHeader">
 
 <h1>
-Creature Cards Game
+Creature Cards
 </h1>
+
+<p>
+CC Game Zone
+</p>
 
 
 <a href="index.html">
 
 <button>
-⬅ Back
+⬅ Back to Index
 </button>
 
 </a>
@@ -37,40 +43,51 @@ Creature Cards Game
 
 
 
+<!-- PLAYER AREA -->
+
 <div class="ccPanel">
 
 
 <h2>
-Profile
+Player Profile
 </h2>
 
 
 <p>
-Player:
-<b id="username"></b>
+Username:
+<b id="username">
+Loading...
+</b>
 </p>
+
 
 
 <p>
 Money:
-<b id="money">0</b>
+<b id="money">
+0
+</b>
 CC
 </p>
 
 
 
+
 <button onclick="claimStarter()">
 
-🎁 Free Pack
+🎁 Claim Free Pack
 
 </button>
+
+
 
 
 <button onclick="buyPack()">
 
-📦 Buy Pack (100 CC)
+📦 Open Pack (100 CC)
 
 </button>
+
 
 
 </div>
@@ -81,6 +98,11 @@ CC
 
 
 
+
+
+<!-- ADMIN JOB CREATOR -->
+
+
 <div id="adminPanel" class="ccPanel">
 
 
@@ -89,12 +111,21 @@ Admin Job Creator
 </h2>
 
 
-<input id="newJob"
+<p>
+Create jobs for players.
+</p>
+
+
+
+<input
+id="newJob"
 placeholder="Job name">
 
 
-<input id="newReward"
-placeholder="Reward">
+
+<input
+id="newReward"
+placeholder="Reward amount">
 
 
 
@@ -114,6 +145,84 @@ Create Job
 
 
 
+
+<!-- ADMIN COMMAND CONSOLE -->
+
+
+<div id="adminConsole" class="ccPanel">
+
+
+<h2>
+Admin Console
+</h2>
+
+
+<p>
+Commands:
+</p>
+
+
+<ul>
+
+<li>
+/resetcards username
+</li>
+
+<li>
+/resetmoney username
+</li>
+
+<li>
+/resetplayer username
+</li>
+
+<li>
+/give username amount
+</li>
+
+<li>
+/job name reward
+</li>
+
+</ul>
+
+
+
+
+<input
+
+id="adminCommand"
+
+placeholder="Enter command">
+
+
+<button onclick="runAdminCommand()">
+
+Run Command
+
+</button>
+
+
+
+<p id="adminResult">
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- JOBS -->
+
+
 <div class="ccPanel">
 
 
@@ -124,6 +233,8 @@ Jobs
 
 <div id="jobs">
 
+Loading jobs...
+
 </div>
 
 
@@ -135,22 +246,32 @@ Jobs
 
 
 
+
+
+<!-- CARDS -->
 
 
 <div class="ccPanel">
 
 
 <h2>
-Collection
+Your Cards
 </h2>
 
 
 <div id="cards" class="cardGrid">
 
+
+Loading cards...
+
+
 </div>
 
 
 </div>
+
+
+
 
 
 
@@ -160,15 +281,46 @@ Collection
 <script src="game.js"></script>
 
 
+
+
 <script>
 
 
-if(localStorage.getItem("CCrole")!="admin"){
+// Hide admin features for normal players
 
 
+if(localStorage.getItem("CCrole") !== "admin"){
+
+
+
+let adminPanel =
 document.getElementById(
 "adminPanel"
-).style.display="none";
+);
+
+
+
+let consolePanel =
+document.getElementById(
+"adminConsole"
+);
+
+
+
+if(adminPanel){
+
+adminPanel.style.display="none";
+
+}
+
+
+
+if(consolePanel){
+
+consolePanel.style.display="none";
+
+}
+
 
 
 }
@@ -176,6 +328,7 @@ document.getElementById(
 
 
 </script>
+
 
 
 </body>
