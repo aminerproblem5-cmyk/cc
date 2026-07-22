@@ -1,114 +1,45 @@
-/* SMALL CC CARD DISPLAY */
-
-.cardGrid{
-
-display:flex;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-}
-
-
-
 .ccCard{
-
-width:150px;
-
-height:190px;
-
-background:#292929;
-
-border:3px solid #555;
-
-border-radius:10px;
-
+width:140px;
+height:170px;
+display:inline-block;
+margin:8px;
 padding:10px;
-
-font-size:13px;
-
+border:3px solid grey;
+border-radius:10px;
+background:#222;
 }
 
 
-
-.ccCard h3{
-
-font-size:16px;
-
-margin:5px 0;
-
+.common{
+border-color:grey;
 }
 
 
-
-
-/* RARITY COLOURS */
-
-
-.rarity-common{
-
-border-color:#999;
-
+.uncommon{
+border-color:green;
 }
 
 
-.rarity-uncommon{
-
-border-color:#00cc44;
-
-}
-
-
-.rarity-rare{
-
+.rare{
 border-color:#3399ff;
-
 }
 
 
-.rarity-legendary{
-
-border-color:#ffd700;
-
-box-shadow:0 0 10px gold;
-
+.legendary{
+border-color:gold;
 }
 
 
-.rarity-mythical{
-
+.mythical{
 border-color:red;
-
-box-shadow:0 0 10px red;
-
 }
 
 
-.rarity-secret{
-
-border-color:#8a2be2;
-
-box-shadow:0 0 15px purple;
-
+.secret{
+border-color:purple;
 }
 
 
-.rarity-obstratick{
-
-border-color:#ff00ff;
-
-background:
-linear-gradient(
-45deg,
-red,
-orange,
-yellow,
-green,
-blue,
-purple
-);
-
-color:white;
-
+.obstratick{
+border-color:rainbow;
 }

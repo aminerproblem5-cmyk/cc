@@ -3,7 +3,7 @@
 
 <head>
 
-<title>Creature Cards Game</title>
+<title>CC Game</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -12,13 +12,12 @@
 
 <body>
 
-
-<h1>Creature Cards</h1>
+<h1>Creature Cards Game</h1>
 
 
 <a href="index.html">
 <button>
-⬅ Back to CC Database
+⬅ Back to Index
 </button>
 </a>
 
@@ -26,26 +25,26 @@
 
 <div class="card">
 
-<h2>Player</h2>
+<h2>Profile</h2>
 
 <p>
-Username:
+Player:
 <b id="username"></b>
 </p>
 
 <p>
 Money:
-<b id="money"></b> CC
+<b id="money">0</b> CC
 </p>
 
 
-<button onclick="starterPack()">
-Claim Free Pack
+<button onclick="claimStarter()">
+Free Starter Pack
 </button>
 
 
-<button onclick="openPack()">
-Open Pack (100 CC)
+<button onclick="buyPack()">
+Buy Pack (100 CC)
 </button>
 
 
@@ -54,13 +53,18 @@ Open Pack (100 CC)
 
 
 
-<div id="adminArea" class="card">
 
-<h2>Admin Job Creator</h2>
+<div id="adminPanel" class="card">
 
-<input id="jobName" placeholder="Job name">
+<h2>Admin Jobs</h2>
 
-<input id="jobReward" placeholder="Reward">
+<input id="newJob"
+placeholder="Job name">
+
+
+<input id="newReward"
+placeholder="Reward">
+
 
 <button onclick="createJob()">
 Create Job
@@ -79,9 +83,13 @@ Create Job
 
 
 
+
 <h2>Your Cards</h2>
 
-<div id="cards" class="cardGrid"></div>
+<div id="cards">
+
+</div>
+
 
 
 
