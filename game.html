@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
 
-<title>CC Game</title>
+<title>Creature Cards Game</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -14,7 +13,15 @@
 <body>
 
 
-<h1>Creature Cards Game</h1>
+<h1>Creature Cards</h1>
+
+
+<a href="index.html">
+<button>
+⬅ Back to CC Database
+</button>
+</a>
+
 
 
 <div class="card">
@@ -22,41 +29,63 @@
 <h2>Player</h2>
 
 <p>
+Username:
+<b id="username"></b>
+</p>
+
+<p>
 Money:
-<span id="money"></span>
+<b id="money"></b> CC
 </p>
 
 
+<button onclick="starterPack()">
+Claim Free Pack
+</button>
+
+
 <button onclick="openPack()">
-Open Pack
-</button>
-
-
-<button onclick="battle()">
-Battle
-</button>
-
-
-<button onclick="trade()">
-Trade
+Open Pack (100 CC)
 </button>
 
 
 </div>
 
 
-<div class="card">
+
+
+<div id="adminArea" class="card">
+
+<h2>Admin Job Creator</h2>
+
+<input id="jobName" placeholder="Job name">
+
+<input id="jobReward" placeholder="Reward">
+
+<button onclick="createJob()">
+Create Job
+</button>
+
+</div>
+
+
+
+
+
+<h2>Jobs</h2>
+
+<div id="jobs"></div>
+
+
+
 
 <h2>Your Cards</h2>
 
-<div id="cards"></div>
-
-</div>
+<div id="cards" class="cardGrid"></div>
 
 
 
 <script src="game.js"></script>
-
 
 </body>
 
