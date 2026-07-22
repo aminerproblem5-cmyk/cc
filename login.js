@@ -2,35 +2,60 @@ const DATABASE_URL =
 "https://creature-cards-ebc02-default-rtdb.firebaseio.com/";
 
 
+
 async function signup(){
+
 
 let username =
 document.getElementById("username").value;
+
 
 let password =
 document.getElementById("password").value;
 
 
-if(username=="" || password==""){
-alert("Fill in everything");
+
+if(!username || !password){
+
+message("Fill everything");
+
 return;
+
 }
+
+
+
+// Prevent making another admin account
+
+if(username==="admin"){
+
+message("That username is reserved");
+
+return;
+
+}
+
+
 
 
 let check =
 await fetch(
-DATABASE_URL+"users/"+username+".json"
+
+DATABASE_URL+
+"users/"+username+".json"
+
 );
+
 
 
 let exists =
 await check.json();
 
 
+
 if(exists){
 
-document.getElementById("status").innerText =
-"Username already exists";
+message("Username already exists");
 
 return;
 
@@ -38,8 +63,35 @@ return;
 
 
 
+
+let user={
+
+
+password:password,
+
+
+role:"player",
+
+
+money:0,
+
+
+cards:[],
+
+
+starterClaimed:false
+
+
+};
+
+
+
+
 await fetch(
-DATABASE_URL+"users/"+username+".json",
+
+DATABASE_URL+
+"users/"+username+".json",
+
 {
 
 method:"PUT",
@@ -48,22 +100,17 @@ headers:{
 "Content-Type":"application/json"
 },
 
-body:JSON.stringify({
+body:JSON.stringify(user)
 
-password:password
+}
 
-})
-
-});
-
-
-localStorage.setItem(
-"CCusername",
-username
 );
 
 
-window.location="index.html";
+
+message("Account created!");
+
+
 
 }
 
@@ -71,7 +118,10 @@ window.location="index.html";
 
 
 
+
+
 async function login(){
+
 
 let username =
 document.getElementById("username").value;
@@ -82,21 +132,33 @@ document.getElementById("password").value;
 
 
 
-let response =
-await fetch(
-DATABASE_URL+"users/"+username+".json"
+
+
+// BUILT IN ADMIN LOGIN
+
+if(
+username==="admin"
+&&
+password==="yourpassword"
+
+){
+
+
+localStorage.setItem(
+"CCusername",
+"admin"
 );
 
 
-let user =
-await response.json();
+localStorage.setItem(
+"CCrole",
+"admin"
+);
 
 
 
-if(!user){
+window.location="game.html";
 
-document.getElementById("status").innerText =
-"Account does not exist";
 
 return;
 
@@ -104,7 +166,47 @@ return;
 
 
 
-if(user.password === password){
+
+
+// NORMAL LOGIN
+
+
+let response =
+await fetch(
+
+DATABASE_URL+
+"users/"+username+".json"
+
+);
+
+
+
+let user =
+await response.json();
+
+
+
+
+if(!user){
+
+message("Account not found");
+
+return;
+
+}
+
+
+
+
+if(user.password!==password){
+
+message("Wrong password");
+
+return;
+
+}
+
+
 
 
 localStorage.setItem(
@@ -113,19 +215,28 @@ username
 );
 
 
-window.location="index.html";
+localStorage.setItem(
+"CCrole",
+"player"
+);
+
+
+
+window.location="game.html";
+
 
 
 }
 
-else{
 
 
-document.getElementById("status").innerText =
-"Wrong password";
 
 
-}
 
+
+function message(text){
+
+document.getElementById("result")
+.innerText=text;
 
 }
